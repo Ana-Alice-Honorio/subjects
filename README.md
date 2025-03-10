@@ -37,3 +37,5 @@ npm run build
 ```sh
 npm run lint
 ```
+
+paleta: https://paletadecores.com/paleta/fc63dd/e84acb/d432b8/c019a6/ac0093/
