@@ -4,6 +4,12 @@ const messages = {
   pt: {
     menu: {
       title: 'Estude+',
+      navbar: {
+        math: 'Matemática',
+        port: 'Português',
+        history: 'História',
+        geo: 'Geografia',
+      },
     },
   },
 }
