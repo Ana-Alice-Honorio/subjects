@@ -15,19 +15,23 @@
             >
               <v-expansion-panel-title>{{ content.title }}</v-expansion-panel-title>
               <v-expansion-panel-text>
-                <p>{{ content.description }}</p>
+                <span>{{ content.description }}</span>
 
                 <v-tabs v-model="activeTab" bg-color="#c019a6">
-                  <v-tab value="aulas">Aulas</v-tab>
-                  <v-tab value="exercicios">Exercícios</v-tab>
-                  <v-tab value="materiais">Materiais</v-tab>
+                  <v-tab value="aulas" class="vtab">{{ $t('accordion.class') }}</v-tab>
+                  <v-tab value="exercicios" class="vtab">{{ $t('accordion.exercises') }}</v-tab>
+                  <v-tab value="materiais" class="vtab">{{ $t('accordion.materials') }}</v-tab>
                 </v-tabs>
 
                 <v-window v-model="activeTab">
                   <v-window-item value="aulas">
                     <v-list bg-color="#FFF0F5">
                       <v-list-item v-for="item in module.options[0].checkList" :key="item.id">
-                        <v-checkbox v-model="item.checked" :label="item.name"></v-checkbox>
+                        <v-checkbox
+                          v-model="item.checked"
+                          :label="item.name"
+                          color="#c019a6"
+                        ></v-checkbox>
                       </v-list-item>
                     </v-list>
                   </v-window-item>
@@ -88,9 +92,16 @@ onMounted(async () => {
   width: 100%;
 }
 
-p,
+span,
 h2 {
   padding: 10px;
+}
+
+span {
+  font-size: small;
+  font-family:
+    'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana,
+    sans-serif;
 }
 
 h2 {
@@ -99,5 +110,10 @@ h2 {
 
 .vtab {
   text-transform: capitalize;
+}
+
+::v-deep(.v-checkbox .v-selection-control) {
+  min-height: auto !important;
+  height: auto !important;
 }
 </style>
