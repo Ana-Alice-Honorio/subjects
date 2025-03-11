@@ -5,11 +5,26 @@ interface Module {
   id: string
   name: string
   content: string
+  options: Option[]
 }
 
 interface Subject {
   name: string
   modules: Module[]
+}
+
+interface Option {
+  id: number
+  name: string
+  expanded: boolean
+  titleOptions: string
+  checkList: CheckListItem[]
+}
+
+interface CheckListItem {
+  id: number
+  name: string
+  checked: boolean
 }
 
 interface State {

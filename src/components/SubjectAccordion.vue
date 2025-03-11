@@ -7,55 +7,68 @@
         <v-expansion-panel-title>{{ module.name }}</v-expansion-panel-title>
         <v-expansion-panel-text>
           <p>{{ module.content }}</p>
+
+          <v-tabs v-model="activeTab">
+            <v-tab value="aulas">Aulas</v-tab>
+            <v-tab value="exercicios">Exercícios</v-tab>
+            <v-tab value="materiais">Materiais</v-tab>
+          </v-tabs>
+
+          <v-window v-model="activeTab">
+            <v-window-item value="aulas">
+              <v-list>
+                <v-list-item v-for="item in module.options[0].checkList" :key="item.id">
+                  <v-checkbox v-model="item.checked" :label="item.name"></v-checkbox>
+                </v-list-item>
+              </v-list>
+            </v-window-item>
+
+            <v-window-item value="exercicios">
+              <v-list>
+                <v-list-item v-for="item in module.options[1].checkList" :key="item.id">
+                  <p>{{ item.name }}</p>
+                </v-list-item>
+              </v-list>
+            </v-window-item>
+
+            <v-window-item value="materiais">
+              <v-list>
+                <v-list-item v-for="item in module.options[2].checkList" :key="item.id">
+                  <a href="#" @click.prevent="downloadMaterial(item)">{{ item.name }}</a>
+                </v-list-item>
+              </v-list>
+            </v-window-item>
+          </v-window>
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
-
-    <p v-else>Carregando...</p>
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, ref } from 'vue'
 import { useSubjectStore } from '@/store/index'
 
 const props = defineProps<{ subject: string }>()
 const store = useSubjectStore()
 
-onMounted(() => {
-  store.fetchSubjects()
-})
-
 const subjectData = computed(() => store.getSubject(props.subject))
 const subjectTitle = computed(() => subjectData.value?.name || 'Matéria')
 
-onMounted(() => {
-  console.log('Dados carregados para:', props.subject, subjectData.value)
-})
+const activeTab = ref('aulas')
+
+const downloadMaterial = (item: { id: number; name: string }) => {
+  console.log(`Baixando: ${item.name}`)
+  alert(`Download de ${item.name} sendo simulado❗❗`)
+}
 </script>
 
 <style scoped>
 .accordion-container {
-  width: 100vh;
-  max-width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
+  width: 80%;
+  max-width: 900px;
 }
-
 .full-panel {
   width: 100%;
-  max-width: 100%;
-}
-
-h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 20px;
 }
 </style>
