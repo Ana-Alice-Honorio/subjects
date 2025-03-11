@@ -18,35 +18,33 @@
         <v-spacer></v-spacer>
 
         <div class="d-none d-md-flex">
-          <v-btn variant="text" @click="scrollTo('math')" class="font-text">
-            {{ $t('menu.navbar.math') }}
-          </v-btn>
-          <v-btn variant="text" @click="scrollTo('port')" class="font-text">
-            {{ $t('menu.navbar.port') }}
-          </v-btn>
-          <v-btn variant="text" @click="scrollTo('history')" class="font-text">
-            {{ $t('menu.navbar.history') }}
-          </v-btn>
-          <v-btn variant="text" @click="scrollTo('geo')" class="font-text">
-            {{ $t('menu.navbar.geo') }}
-          </v-btn>
+          <v-btn variant="text" @click="navigateOrScroll('math')">{{
+            $t('menu.navbar.math')
+          }}</v-btn>
+          <v-btn variant="text" @click="navigateOrScroll('portuguese')">{{
+            $t('menu.navbar.port')
+          }}</v-btn>
+          <v-btn variant="text" @click="navigateOrScroll('history')">{{
+            $t('menu.navbar.history')
+          }}</v-btn>
+          <v-btn variant="text" @click="navigateOrScroll('geography')">{{
+            $t('menu.navbar.geo')
+          }}</v-btn>
         </div>
       </v-app-bar>
 
       <v-navigation-drawer v-model="drawer" temporary>
         <v-list>
-          <v-list-item @click="scrollTo('math')">
-            {{ $t('menu.navbar.math') }}
-          </v-list-item>
-          <v-list-item @click="scrollTo('port')">
-            {{ $t('menu.navbar.port') }}
-          </v-list-item>
-          <v-list-item @click="scrollTo('history')">
-            {{ $t('menu.navbar.history') }}
-          </v-list-item>
-          <v-list-item @click="scrollTo('geo')">
-            {{ $t('menu.navbar.geo') }}
-          </v-list-item>
+          <v-list-item @click="navigateOrScroll('math')">{{ $t('menu.navbar.math') }}</v-list-item>
+          <v-list-item @click="navigateOrScroll('portuguese')">{{
+            $t('menu.navbar.port')
+          }}</v-list-item>
+          <v-list-item @click="navigateOrScroll('history')">{{
+            $t('menu.navbar.history')
+          }}</v-list-item>
+          <v-list-item @click="navigateOrScroll('geography')">{{
+            $t('menu.navbar.geo')
+          }}</v-list-item>
         </v-list>
       </v-navigation-drawer>
     </v-layout>
@@ -55,14 +53,25 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const drawer = ref(false)
+const route = useRoute()
+const router = useRouter()
+
+const navigateOrScroll = (id: string) => {
+  if (route.path === '/') {
+    scrollTo(id)
+  } else {
+    router.push(`/subject/${id}`)
+  }
+  drawer.value = false
+}
 
 const scrollTo = (id: string) => {
   const element = document.getElementById(id)
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' })
-    drawer.value = false
   }
 }
 </script>
