@@ -8,23 +8,29 @@
         <v-expansion-panel-text>
           <p>{{ module.content }}</p>
 
-          <v-tabs v-model="activeTab">
-            <v-tab value="aulas">Aulas</v-tab>
-            <v-tab value="exercicios">Exercícios</v-tab>
-            <v-tab value="materiais">Materiais</v-tab>
+          <v-tabs v-model="activeTab" bg-color="#d432b8">
+            <v-tab value="aulas" class="vtab">{{ $t('accordion.class') }}</v-tab>
+            <v-tab value="exercicios" class="vtab">{{ $t('accordion.exercises') }}</v-tab>
+            <v-tab value="materiais" class="vtab">{{ $t('accordion.materials') }}</v-tab>
           </v-tabs>
 
           <v-window v-model="activeTab">
             <v-window-item value="aulas">
-              <v-list>
-                <v-list-item v-for="item in module.options[0].checkList" :key="item.id">
-                  <v-checkbox v-model="item.checked" :label="item.name"></v-checkbox>
-                </v-list-item>
+              <v-list bg-color="#FFF0F5">
+                <v-list-item-group v-for="item in module.options[0].checkList" :key="item.id" dense>
+                  <v-list-item>
+                    <v-checkbox
+                      v-model="item.checked"
+                      :label="item.name"
+                      color="#ac0093"
+                    ></v-checkbox>
+                  </v-list-item>
+                </v-list-item-group>
               </v-list>
             </v-window-item>
 
             <v-window-item value="exercicios">
-              <v-list>
+              <v-list bg-color="#FFF0F5">
                 <v-list-item v-for="item in module.options[1].checkList" :key="item.id">
                   <p>{{ item.name }}</p>
                 </v-list-item>
@@ -32,7 +38,7 @@
             </v-window-item>
 
             <v-window-item value="materiais">
-              <v-list>
+              <v-list bg-color="#FFF0F5">
                 <v-list-item v-for="item in module.options[2].checkList" :key="item.id">
                   <a href="#" @click.prevent="downloadMaterial(item)">{{ item.name }}</a>
                 </v-list-item>
@@ -46,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useSubjectStore } from '@/store/index'
 
 const props = defineProps<{ subject: string }>()
@@ -61,6 +67,10 @@ const downloadMaterial = (item: { id: number; name: string }) => {
   console.log(`Baixando: ${item.name}`)
   alert(`Download de ${item.name} sendo simulado❗❗`)
 }
+
+onMounted(async () => {
+  await store.fetchSubjects()
+})
 </script>
 
 <style scoped>
@@ -70,5 +80,18 @@ const downloadMaterial = (item: { id: number; name: string }) => {
 }
 .full-panel {
   width: 100%;
+}
+
+p,
+h2 {
+  padding: 10px;
+}
+
+h2 {
+  font-size: medium;
+}
+
+.vtab {
+  text-transform: capitalize;
 }
 </style>

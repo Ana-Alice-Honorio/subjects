@@ -11,6 +11,12 @@ const messages = {
         geo: 'Geografia',
       },
     },
+
+    accordion: {
+      class: 'Aulas',
+      exercises: 'Exercícios',
+      materials: 'Materiais',
+    },
   },
 }
 
