@@ -1,32 +1,12 @@
 <template>
   <main class="home-container">
-    <section id="math"><MathSubject /></section>
-    <section id="port"><PortugueseSubject /></section>
-    <section id="history"><HistorySubject /></section>
-    <section id="geo"><GeographySubject /></section>
+    <section id="math"><SubjectAccordion subjectId="math" /></section>
+    <section id="port"><SubjectAccordion subjectId="portuguese" /></section>
+    <section id="history"><SubjectAccordion subjectId="history" /></section>
+    <section id="geo"><SubjectAccordion subjectId="geography" /></section>
   </main>
 </template>
 
 <script setup lang="ts">
-import MathSubject from '../components/MathSubject.vue'
-import PortugueseSubject from '../components/PortugueseSubject.vue'
-import HistorySubject from '../components/HistorySubject.vue'
-import GeographySubject from '../components/GeographySubject.vue'
+import SubjectAccordion from '../components/SubjectAccordion.vue'
 </script>
-
-<style scoped>
-.home-container {
-  scroll-snap-type: y mandatory;
-  overflow-y: visible;
-  height: 100vh;
-}
-
-section {
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  scroll-snap-align: start;
-}
-</style>

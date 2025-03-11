@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h2>Matemática</h2>
+    <h2>{{ subject?.name }}</h2>
     <v-expansion-panels>
       <v-expansion-panel v-for="module in subject?.modules" :key="module.id">
         <v-expansion-panel-title>{{ module.name }}</v-expansion-panel-title>
@@ -13,9 +13,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useSubjectStore } from '../stores/index'
+import { computed, onMounted } from 'vue'
+import { useSubjectStore } from '../store/index'
 
+const props = defineProps<{ subjectId: string }>()
 const store = useSubjectStore()
-const subject = computed(() => store.getSubject('math'))
+
+onMounted(() => {
+  if (!store.subjects[props.subjectId]) {
+    store.fetchSubjects()
+  }
+})
+
+const subject = computed(() => store.getSubject(props.subjectId))
 </script>
