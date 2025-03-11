@@ -6,45 +6,46 @@
       <v-expansion-panel v-for="module in subjectData.modules" :key="module.id">
         <v-expansion-panel-title>{{ module.name }}</v-expansion-panel-title>
         <v-expansion-panel-text>
-          <p>{{ module.content }}</p>
+          <v-expansion-panels>
+            <v-expansion-panel v-for="content in module.contents" :key="content.id">
+              <v-expansion-panel-title>{{ content.title }}</v-expansion-panel-title>
+              <v-expansion-panel-text>
+                <p>{{ content.description }}</p>
 
-          <v-tabs v-model="activeTab" bg-color="#d432b8">
-            <v-tab value="aulas" class="vtab">{{ $t('accordion.class') }}</v-tab>
-            <v-tab value="exercicios" class="vtab">{{ $t('accordion.exercises') }}</v-tab>
-            <v-tab value="materiais" class="vtab">{{ $t('accordion.materials') }}</v-tab>
-          </v-tabs>
+                <v-tabs v-model="activeTab" bg-color="#c019a6">
+                  <v-tab value="aulas">Aulas</v-tab>
+                  <v-tab value="exercicios">Exercícios</v-tab>
+                  <v-tab value="materiais">Materiais</v-tab>
+                </v-tabs>
 
-          <v-window v-model="activeTab">
-            <v-window-item value="aulas">
-              <v-list bg-color="#FFF0F5">
-                <v-list-item-group v-for="item in module.options[0].checkList" :key="item.id" dense>
-                  <v-list-item>
-                    <v-checkbox
-                      v-model="item.checked"
-                      :label="item.name"
-                      color="#ac0093"
-                    ></v-checkbox>
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </v-window-item>
+                <v-window v-model="activeTab">
+                  <v-window-item value="aulas">
+                    <v-list bg-color="#FFF0F5">
+                      <v-list-item v-for="item in module.options[0].checkList" :key="item.id">
+                        <v-checkbox v-model="item.checked" :label="item.name"></v-checkbox>
+                      </v-list-item>
+                    </v-list>
+                  </v-window-item>
 
-            <v-window-item value="exercicios">
-              <v-list bg-color="#FFF0F5">
-                <v-list-item v-for="item in module.options[1].checkList" :key="item.id">
-                  <p>{{ item.name }}</p>
-                </v-list-item>
-              </v-list>
-            </v-window-item>
+                  <v-window-item value="exercicios">
+                    <v-list bg-color="#FFF0F5">
+                      <v-list-item v-for="item in module.options[1].checkList" :key="item.id">
+                        <p>{{ item.name }}</p>
+                      </v-list-item>
+                    </v-list>
+                  </v-window-item>
 
-            <v-window-item value="materiais">
-              <v-list bg-color="#FFF0F5">
-                <v-list-item v-for="item in module.options[2].checkList" :key="item.id">
-                  <a href="#" @click.prevent="downloadMaterial(item)">{{ item.name }}</a>
-                </v-list-item>
-              </v-list>
-            </v-window-item>
-          </v-window>
+                  <v-window-item value="materiais">
+                    <v-list bg-color="#FFF0F5">
+                      <v-list-item v-for="item in module.options[2].checkList" :key="item.id">
+                        <a href="#" @click.prevent="downloadMaterial(item)">{{ item.name }}</a>
+                      </v-list-item>
+                    </v-list>
+                  </v-window-item>
+                </v-window>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
         </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
