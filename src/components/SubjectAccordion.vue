@@ -7,7 +7,12 @@
         <v-expansion-panel-title>{{ module.name }}</v-expansion-panel-title>
         <v-expansion-panel-text>
           <v-expansion-panels>
-            <v-expansion-panel v-for="content in module.contents" :key="content.id">
+            <v-expansion-panel
+              v-for="content in module.contents"
+              :key="content.id"
+              collapse-icon="mdi-minus"
+              expand-icon="mdi-plus"
+            >
               <v-expansion-panel-title>{{ content.title }}</v-expansion-panel-title>
               <v-expansion-panel-text>
                 <p>{{ content.description }}</p>
