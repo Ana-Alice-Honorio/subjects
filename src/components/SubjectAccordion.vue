@@ -38,7 +38,11 @@
                           v-model="item.checked"
                           :label="item.name"
                           color="#c019a6"
-                          class="check"
+                          :style="{
+                            textTransform: 'capitalize',
+                            fontSize: 'small',
+                            fontFamily: 'Lucida Sans',
+                          }"
                         ></v-checkbox>
                       </v-list-item>
                     </v-list>
@@ -55,7 +59,8 @@
                   <v-window-item value="materiais">
                     <v-list bg-color="#FFF0F5">
                       <v-list-item v-for="item in module.options[2].checkList" :key="item.id">
-                        <a href="#" @click.prevent="downloadMaterial(item)">{{ item.name }}</a>
+                        <a href="#" @click.prevent="downloadMaterial(item)">{{ item.name }}</a
+                        >⬆
                       </v-list-item>
                     </v-list>
                   </v-window-item>
@@ -132,7 +137,9 @@ h2 {
   padding: 5px;
 }
 
-.vtab {
+.vtab,
+a,
+p {
   text-transform: capitalize;
   font-size: small;
   font-family:
@@ -143,5 +150,13 @@ h2 {
 ::v-deep(.v-checkbox .v-selection-control) {
   min-height: auto !important;
   height: auto !important;
+}
+
+::v-deep(.v-input__details) {
+  all: unset !important;
+}
+
+a {
+  text-decoration: none;
 }
 </style>
