@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-interface Module {
+export interface Module {
   id: string
   name: string
   content: string
@@ -13,7 +13,7 @@ interface Subject {
   modules: Module[]
 }
 
-interface Option {
+export interface Option {
   id: number
   name: string
   expanded: boolean

@@ -92,6 +92,7 @@ const subjects = {
             checkList: [
               { id: 201, name: 'Exercício 1' },
               { id: 202, name: 'Exercício 2' },
+              { id: 203, name: 'Exercício 3' },
             ],
           },
           {

@@ -13,17 +13,24 @@
               collapse-icon="mdi-minus"
               expand-icon="mdi-plus"
             >
-              <v-expansion-panel-title>{{ content.title }}</v-expansion-panel-title>
+              <v-expansion-panel-title>
+                {{ content.title }}
+                <small class="summary">
+                  📽 {{ countTotal(module, 'Aulas') }} {{ $t('accordion.class') }} | ✏️
+                  {{ countTotal(module, 'Exercícios') }} {{ $t('accordion.exercises') }} | 📄
+                  {{ countTotal(module, 'Materiais') }} {{ $t('accordion.materials') }}
+                </small>
+              </v-expansion-panel-title>
               <v-expansion-panel-text>
                 <span>{{ content.description }}</span>
 
-                <v-tabs v-model="activeTab" bg-color="#c019a6">
+                <v-tabs v-model="activeTab[content.id]" bg-color="#c019a6">
                   <v-tab value="aulas" class="vtab">{{ $t('accordion.class') }}</v-tab>
                   <v-tab value="exercicios" class="vtab">{{ $t('accordion.exercises') }}</v-tab>
                   <v-tab value="materiais" class="vtab">{{ $t('accordion.materials') }}</v-tab>
                 </v-tabs>
 
-                <v-window v-model="activeTab">
+                <v-window v-model="activeTab[content.id]">
                   <v-window-item value="aulas">
                     <v-list bg-color="#FFF0F5">
                       <v-list-item v-for="item in module.options[0].checkList" :key="item.id">
@@ -65,6 +72,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useSubjectStore } from '@/store/index'
+import type { Module, Option } from '@/store'
 
 const props = defineProps<{ subject: string }>()
 const store = useSubjectStore()
@@ -72,11 +80,16 @@ const store = useSubjectStore()
 const subjectData = computed(() => store.getSubject(props.subject))
 const subjectTitle = computed(() => subjectData.value?.name || 'Matéria')
 
-const activeTab = ref('aulas')
+const activeTab = ref<{ [key: string]: string }>({})
 
 const downloadMaterial = (item: { id: number; name: string }) => {
   console.log(`Baixando: ${item.name}`)
   alert(`Download de ${item.name} sendo simulado❗❗`)
+}
+
+const countTotal = (module: Module, type: string): number => {
+  const option = module.options.find((opt: Option) => opt.name === type)
+  return option ? option.checkList.length : 0
 }
 
 onMounted(async () => {
@@ -109,6 +122,14 @@ span {
 
 h2 {
   font-size: medium;
+}
+
+.summary {
+  font-size: 12px;
+  color: gray;
+  display: block;
+  margin-top: 4px;
+  padding: 5px;
 }
 
 .vtab {

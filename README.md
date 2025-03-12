@@ -36,6 +36,7 @@
 - [Pinia](https://pinia.vuejs.org/introduction.html) para gerenciamento de estado
 - [Vuetify](https://vuetifyjs.com/en/) para componentes
 - [Paleta](https://paletadecores.com/paleta/fc63dd/e84acb/d432b8/c019a6/ac0093/) de cores utilizada neste projeto
+- [Emojis](https://www.invertexto.com/emojis-para-copiar) para copiar
 
 ## 🛠 Recomendação de Setup e IDE
 
