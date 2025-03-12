@@ -4,7 +4,7 @@ import axios from 'axios'
 export interface Module {
   id: string
   name: string
-  content: string
+  contents: string
   options: Option[]
 }
 

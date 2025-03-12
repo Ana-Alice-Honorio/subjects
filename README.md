@@ -17,6 +17,8 @@
 ![last commit](https://img.shields.io/github/last-commit/Ana-Alice-Honorio/subjects?style=for-the-badge")
 ![Feito por Alice](https://img.shields.io/badge/feito-por%20Alice-D818A5")
 
+Este projeto trata-se de uma SPA (Single Page Application), usando um scroll smooth. Com isso, foi utilizado o vue [router](https://router.vuejs.org/) para melhor usabilidade.
+
 <div  align="center">
   <img src="./public/image-readme.png" width="500px" />
 </div>
