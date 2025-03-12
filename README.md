@@ -34,11 +34,12 @@ Este projeto trata-se de uma SPA (Single Page Application), usando um scroll smo
 - [Vite](https://vite.dev/guide/) para rapidez no build
 - [Vue i18n](https://vue-i18n.intlify.dev/) para internalização de texto
 - [Axios](https://www.npmjs.com/package/axios) - para consumo de dados
-- [Mock.js](https://www.npmjs.com/package/mockjs) para mock dos dados
+- [Mock Adapter](https://www.npmjs.com/package/axios-mock-adapter) para mock dos dados
 - [Pinia](https://pinia.vuejs.org/introduction.html) para gerenciamento de estado
 - [Vuetify](https://vuetifyjs.com/en/) para componentes
 - [Paleta](https://paletadecores.com/paleta/fc63dd/e84acb/d432b8/c019a6/ac0093/) de cores utilizada neste projeto
 - [Emojis](https://www.invertexto.com/emojis-para-copiar) para copiar
+- [Js Doc](https://jsdoc.app/) para documentação do código
 
 ## 🛠 Recomendação de Setup e IDE
 

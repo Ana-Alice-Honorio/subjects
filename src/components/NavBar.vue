@@ -69,6 +69,10 @@ const navigateOrScroll = (id: string) => {
 }
 
 const scrollTo = (id: string) => {
+  /**
+   * Passando o id diretamente no router pois estou usando o history com hash no router
+   */
+  router.replace({ hash: `${id}` }) //
   const element = document.getElementById(id)
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' })
