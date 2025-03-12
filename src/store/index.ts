@@ -1,10 +1,16 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
+export interface Content {
+  id: string
+  title: string
+  description: string
+}
+
 export interface Module {
   id: string
   name: string
-  contents: string
+  contents: Content[]
   options: Option[]
 }
 
