@@ -31,6 +31,7 @@
                           v-model="item.checked"
                           :label="item.name"
                           color="#c019a6"
+                          class="check"
                         ></v-checkbox>
                       </v-list-item>
                     </v-list>
@@ -102,6 +103,8 @@ span {
   font-family:
     'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana,
     sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 h2 {
@@ -110,6 +113,10 @@ h2 {
 
 .vtab {
   text-transform: capitalize;
+  font-size: small;
+  font-family:
+    'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana,
+    sans-serif;
 }
 
 ::v-deep(.v-checkbox .v-selection-control) {
