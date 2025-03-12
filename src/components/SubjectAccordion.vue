@@ -1,5 +1,5 @@
 <template>
-  <v-container class="accordion-container">
+  <v-container class="accordion-container" fluid>
     <h2>{{ subjectTitle }}</h2>
 
     <v-expansion-panels v-if="subjectData" class="full-panel">
@@ -24,15 +24,15 @@
               <v-expansion-panel-text>
                 <span>{{ content.description }}</span>
 
-                <v-tabs v-model="activeTab[content.id]" bg-color="#c019a6">
+                <v-tabs v-model="activeTab[content.id]" bg-color="#c019a6" dense scrollable>
                   <v-tab value="aulas" class="vtab">{{ $t('accordion.class') }}</v-tab>
                   <v-tab value="exercicios" class="vtab">{{ $t('accordion.exercises') }}</v-tab>
                   <v-tab value="materiais" class="vtab">{{ $t('accordion.materials') }}</v-tab>
                 </v-tabs>
 
-                <v-window v-model="activeTab[content.id]">
+                <v-window v-model="activeTab[content.id]" dense>
                   <v-window-item value="aulas">
-                    <v-list bg-color="#FFF0F5">
+                    <v-list bg-color="#FFF0F5" dense>
                       <v-list-item v-for="item in module.options[0].checkList" :key="item.id">
                         <v-checkbox
                           v-model="item.checked"
@@ -49,7 +49,7 @@
                   </v-window-item>
 
                   <v-window-item value="exercicios">
-                    <v-list bg-color="#FFF0F5">
+                    <v-list bg-color="#FFF0F5" dense>
                       <v-list-item v-for="item in module.options[1].checkList" :key="item.id">
                         <p>{{ item.name }}</p>
                       </v-list-item>
@@ -57,7 +57,7 @@
                   </v-window-item>
 
                   <v-window-item value="materiais">
-                    <v-list bg-color="#FFF0F5">
+                    <v-list bg-color="#FFF0F5" dense>
                       <v-list-item v-for="item in module.options[2].checkList" :key="item.id">
                         <a href="#" @click.prevent="downloadMaterial(item)">{{ item.name }}</a
                         >⬆
@@ -158,5 +158,38 @@ p {
 
 a {
   text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .summary {
+    font-size: 10px;
+  }
+
+  .vtab {
+    font-size: smaller;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .accordion-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .v-tabs,
+  .v-window {
+    width: 100%;
+    margin: 0;
+  }
+
+  .v-expansion-panel-title {
+    font-size: smaller;
+  }
+
+  .v-expansion-panel-text {
+    font-size: small;
+  }
 }
 </style>
